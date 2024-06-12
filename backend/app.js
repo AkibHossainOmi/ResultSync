@@ -8,16 +8,15 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
-// Import routes
 const subjectRoutes  = require('./routes/subjectRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 const resultRoutes = require('./routes/resultRoutes');
+const authRoutes = require('./routes/authRoutes');
 
-// Use routes
 app.use('/subjects', subjectRoutes );
 app.use('/students', studentRoutes);
 app.use('/results', resultRoutes);
-
+app.use('/auth', authRoutes);
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
