@@ -10,16 +10,16 @@ export default function Authenticating() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
-
     if (!token) {
       setMessage('Token expired or not found');
       return;
     }
 
     // Send token to backend for validation
-    axios.post('/auth/:token', { token })
+    axios.get(`http://localhost:8000/auth/${token}`)
       .then(response => {
-        if (response.data.valid) {
+        console.log(response);
+        if (response.data.success) {
           // Token is valid, redirect to the appropriate page
           localStorage.setItem('authToken', token);
           navigate('/result');

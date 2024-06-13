@@ -14,6 +14,25 @@ class Result {
       });
     });
   }
+
+  static getResults(registrationNo, semester) {
+    return new Promise((resolve, reject) => {
+      const query = `
+        SELECT Result.reg_no, Result.subject_code, Result.marks, Subject.subject_name
+        FROM Result
+        JOIN Subject ON Result.subject_code = Subject.subject_code
+        WHERE Result.reg_no = ? AND Subject.semester = ?
+      `;
+      pool.query(query, [registrationNo, semester], (error, results) => {
+        if (error) {
+          console.error('Error fetching results:', error);
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }
 }
 
 module.exports = Result;

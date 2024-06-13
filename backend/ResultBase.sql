@@ -2,7 +2,8 @@ CREATE DATABASE IF NOT EXISTS ResultBase;
 USE ResultBase;
 CREATE TABLE IF NOT EXISTS Subject (
     subject_code VARCHAR(10) PRIMARY KEY,
-    subject_name VARCHAR(100) NOT NULL
+    subject_name VARCHAR(100) NOT NULL,
+    semester INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Student (

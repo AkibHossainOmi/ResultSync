@@ -30,7 +30,7 @@ const StudentList = () => {
   return (
     <div>
       <Navbar/>
-      <div className="mt-60 container mx-auto">
+      <div className="pt-5 mt-60 container mx-auto">
         <h2 className="text-2xl font-bold mb-4 flex justify-center">All Students</h2>
         <div className="w-1/2 mx-auto">
           <table className="w-full border-collapse border border-gray-200">

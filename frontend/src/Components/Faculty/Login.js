@@ -36,7 +36,7 @@ export default function EmailLogin() {
   return !isAuthenticated? (
     <div className="">
       <Navbar />
-      <div className="mt-60 container mx-auto flex justify-center">
+      <div className="pt-5 mt-60 container mx-auto flex justify-center">
         <form className="mt-6 w-1/3" onSubmit={handleLogin}>
           <div className="mb-2">
             <label htmlFor="email" className="block text-sm font-semibold text-gray-800">

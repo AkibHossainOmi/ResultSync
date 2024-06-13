@@ -1,10 +1,10 @@
 const Subject = require('../models/subjectModel');
 
 exports.addSubject = async (req, res) => {
-  const { subjectCode, subjectName } = req.body;
+  const { subjectCode, subjectName, semester } = req.body;
 
   try {
-    await Subject.insertSubject(subjectCode, subjectName);
+    await Subject.insertSubject(subjectCode, subjectName, semester);
     res.status(201).json({ message: 'Subject added successfully' });
   } catch (error) {
     console.error(error);

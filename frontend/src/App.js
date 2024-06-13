@@ -8,16 +8,15 @@ import Navbar from './Components/Navbar/Navbar';
 import Login from './Components/Faculty/Login';
 import ProtectedRoute from './Components/Auth/ProtectedRoute';
 import Authenticating from './Components/Auth/AuthController';
-import { useAuth } from './Components/Hooks/UseAuth';
+import Evaluation from './Components/Student/Evaluation';
 
 function App() {
-  const isAuthenticated = useAuth();
-  console.log(isAuthenticated);
   return (
     <div className="font-roboto">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navbar />} />
+          <Route path="/" element={<Evaluation />} />
+          <Route path="/navbar" element={<Navbar />} />
           <Route path="/login" element={<Login />} />
           <Route path="/auth" element={<Authenticating />} />
           <Route element={<ProtectedRoute />}>

@@ -84,7 +84,7 @@ const ResultController = () => {
   return (
     <div>
       <Navbar/>
-      <div className="mt-60 container mx-auto">
+      <div className="pt-5 mt-60 container mx-auto">
         {message && <p className="bg-green-200 text-green-800 py-2 px-4 rounded mb-4">{message}</p>}
         <h2 className="text-2xl font-bold mb-4 flex justify-center">Enter Subject Marks</h2>
         <div className="flex justify-center mb-4">

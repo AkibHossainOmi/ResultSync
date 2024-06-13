@@ -1,9 +1,9 @@
 const pool = require('../config/database');
 
 class Subject {
-  static insertSubject(subjectCode, subjectName) {
+  static insertSubject(subjectCode, subjectName, semester) {
     return new Promise((resolve, reject) => {
-      pool.query('INSERT INTO Subject (subject_code, subject_name) VALUES (?, ?)', [subjectCode, subjectName], (error, results) => {
+      pool.query('INSERT INTO Subject (subject_code, subject_name, semester) VALUES (?, ?, ?)', [subjectCode, subjectName, semester], (error, results) => {
         if (error) {
           reject(error);
         } else {
@@ -15,7 +15,7 @@ class Subject {
 
   static getAllSubjects() {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT subject_code as code, subject_name as name FROM Subject', (error, results) => {
+      pool.query('SELECT semester, subject_code as code, subject_name as name FROM Subject', (error, results) => {
         if (error) {
           reject(error);
         } else {
