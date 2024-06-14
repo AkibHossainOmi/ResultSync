@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: 'ecosyncinfo@gmail.com',
+    user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD,
   },
 });
@@ -21,7 +21,7 @@ const sendEmail = (email, token) => {
     const filePath = path.join(__dirname, 'emailTemplate.html');
     const htmlContent = fs.readFileSync(filePath, 'utf8');
     const mailOptions = {
-      from: 'ecosyncinfo@gmail.com',
+      from: process.env.EMAIL_USER,
       to: email,
       subject: 'ResultSync Login Link',
       html: htmlContent.replace('{{loginUrl}}', loginUrl)
