@@ -135,8 +135,8 @@ const dropdownRef = useRef(null);
      <nav className="fixed flex w-full p-8 bg-slate-500 top-0 h-16 sm:h-16 md:h-16 lg:h-16 xl:h-16">
         <div className="flex items-center justify-between w-full">
             <div className="hidden sm:flex space-x-4 items-center">
-                <Link to="/" className="text-white font-bold text-lg hover: flex justify-center">
-                    <img src="ResultMage.png" alt="ResultSync Logo" className="h-8 w-12 invert" />
+                <Link to="/" className="bg-white text-white font-bold text-lg hover: flex justify-center">
+                    <img src="https://diit.edu.bd/static/website/img/logo/header_logo_one.png" alt="ResultSync Logo" className="pt-2 pl-2 pr-2 pb-2 h-10 w-18" />
                 </Link>
                 <Link to="/" className="pl-5 text-white text-lg hover: ">
                     Home
