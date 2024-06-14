@@ -18,7 +18,7 @@ const ResultController = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/students');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/students`);
       setStudents(response.data);
     } catch (error) {
       console.error('Error fetching students:', error);
@@ -27,7 +27,7 @@ const ResultController = () => {
 
   const fetchSubjects = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/subjects');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/subjects`);
       setSubjects(response.data);
     } catch (error) {
       console.error('Error fetching subjects:', error);
@@ -68,7 +68,7 @@ const ResultController = () => {
         marks,
       }));
     console.log(marksToSend);
-      await axios.post('http://localhost:8000/results', marksToSend);
+      await axios.post(`${process.env.REACT_APP_API_URL}/results`, marksToSend);
       setMessage('Marks submitted successfully!');
     } catch (error) {
       console.error('Error submitting marks:', error);

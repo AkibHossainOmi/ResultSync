@@ -19,7 +19,7 @@ const SubjectController = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/subjects', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/subjects`, {
         subjectCode,
         subjectName,
         semester: semesterInt  // Include validated semester in the request payload

@@ -15,9 +15,7 @@ export default function EmailLogin() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-
-    axios.post('http://localhost:8000/auth', { email })
+    axios.post(`${process.env.REACT_APP_API_URL}/auth`, { email })
       .then(response => {
         setMessage("Login link sent. Please check your email.");
         setTokenStatus(response.data.message);

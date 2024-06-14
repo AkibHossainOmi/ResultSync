@@ -16,7 +16,7 @@ export default function Authenticating() {
     }
 
     // Send token to backend for validation
-    axios.get(`http://localhost:8000/auth/${token}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/auth/${token}`)
       .then(response => {
         console.log(response);
         if (response.data.success) {

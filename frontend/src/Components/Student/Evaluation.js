@@ -27,7 +27,7 @@ const Evaluation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get('http://localhost:8000/results', {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/results`, {
         params: {
           registrationNo,
           semester: selectedSemester.value,

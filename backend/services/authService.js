@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -10,13 +11,13 @@ const transporter = nodemailer.createTransport({
   secure: true,
   auth: {
     user: 'ecosyncinfo@gmail.com',
-    pass: 'vglg zlic vtmo emqo',
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
 const sendEmail = (email, token) => {
   return new Promise((resolve, reject) => {
-    const loginUrl = `http://localhost:3000/auth?token=${token}`;
+    const loginUrl = `${process.env.FRONTEND_URL}/auth?token=${token}`;
     const filePath = path.join(__dirname, 'emailTemplate.html');
     const htmlContent = fs.readFileSync(filePath, 'utf8');
     const mailOptions = {

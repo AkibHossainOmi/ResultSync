@@ -11,7 +11,7 @@ const StudentList = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/students');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/students`);
       setStudents(response.data);
     } catch (error) {
       console.error('Error fetching students:', error);
@@ -20,7 +20,7 @@ const StudentList = () => {
 
   const handleDeleteRow = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/students/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/students/${id}`);
       setStudents(students.filter(student => student.id !== id));
     } catch (error) {
       console.error('Error deleting student:', error);

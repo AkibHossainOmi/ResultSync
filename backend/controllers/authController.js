@@ -5,17 +5,20 @@ const initiateLogin = async (req, res) => {
   try {
     const { email } = req.body;
 
-    if (!email.endsWith('@diit.edu.bd')) {
+    if(email.endsWith('@diit.edu.bd')||email.endsWith('@diit.info'))
+    {
+      const token = jwt.sign({ email }, 'resultsync_secret', { expiresIn: '5m' });
+
+      res.status(200).json({ message: 'Login link sent. Please check your email.' });
+
+      auth.sendEmail(email, token)
+        .then(() => console.log('Email sent successfully to:', email))
+        .catch(error => console.error('Error sending email:', error)); 
+    }
+    else
+    {
       return res.status(400).json({ message: 'Invalid email domain' });
     }
-
-    const token = jwt.sign({ email }, 'resultsync_secret', { expiresIn: '5m' });
-
-    res.status(200).json({ message: 'Login link sent. Please check your email.' });
-
-    auth.sendEmail(email, token)
-      .then(() => console.log('Email sent successfully to:', email))
-      .catch(error => console.error('Error sending email:', error));
   } catch (error) {
     console.error('Error initiating login:', error);
     res.status(500).json({ message: 'Internal server error' });
