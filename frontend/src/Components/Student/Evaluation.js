@@ -8,7 +8,8 @@ const Evaluation = () => {
   const [selectedSemester, setSelectedSemester] = useState(null);
   const [results, setResults] = useState([]);
   const [message, setMessage] = useState('');
-  const [averageCGPA, setAverageCGPA] = useState(0); // State to hold average CGPA
+  const [averageCGPA, setAverageCGPA] = useState(0); 
+
   const semesters = [
     { value: '1', label: 'Semester 1' },
     { value: '2', label: 'Semester 2' },
@@ -26,6 +27,8 @@ const Evaluation = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setResults([]);
+    setMessage('');
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/results`, {
         params: {
@@ -33,22 +36,19 @@ const Evaluation = () => {
           semester: selectedSemester.value,
         },
       });
-      console.log(response);
       const resultsWithCGPA = response.data.map(result => ({
         ...result,
         cgpa: calculateCGPA(result.marks),
       }));
       setResults(resultsWithCGPA);
-      calculateAverageCGPA(resultsWithCGPA); // Calculate average CGPA
-      setMessage('');
+      calculateAverageCGPA(resultsWithCGPA); 
     } catch (error) {
       console.error('Error fetching results:', error);
-      setMessage('Error fetching results. Please try again.');
+      setMessage(error.response.data.message);
     }
   };
 
   const calculateCGPA = (marks) => {
-    // Function to calculate CGPA based on a sample grading system
     if (marks >= 90) {
       return 4.0;
     } else if (marks >= 80) {
@@ -67,7 +67,6 @@ const Evaluation = () => {
   };
 
   const calculateAverageCGPA = (results) => {
-    // Calculate average CGPA from the results array
     if (results.length === 0) {
       setAverageCGPA(0);
       return;
@@ -80,8 +79,10 @@ const Evaluation = () => {
 
   return (
     <div>
+      <div className="relative z-50">
       <Navbar />
-      <div className="pt-5 mt-60 container mx-auto">
+      </div>
+      <div className="pt-5 mt-40 container mx-auto">
         <h2 className="text-2xl font-bold mb-4 flex justify-center">View Results</h2>
         <div className="flex justify-center mb-4">
           <form className="w-2/4" onSubmit={handleSubmit}>
@@ -103,16 +104,13 @@ const Evaluation = () => {
                 Semester
               </label>
               <Select
-                options={semesters.map((semester) => ({ value: semester.value, label: semester.value }))}
+                options={semesters}
                 value={selectedSemester}
                 onChange={setSelectedSemester}
                 className="w-full"
                 placeholder="Select Semester"
                 required
               />
-            </div>
-            <div className='flex justify-center'>
-              {message && <p className="w-full bg-red-200 text-red-800 py-2 px-4 rounded mb-4 text-center">{message}</p>}
             </div>
             <div className="flex justify-center">
               <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -121,9 +119,11 @@ const Evaluation = () => {
             </div>
           </form>
         </div>
-        {results.length > 0? (
-          <div className="mt-4 flex justify-center">
-            <table className="w-2/4 border-collapse border border-gray-200">
+          <div className='flex justify-center'>
+            {message && <p className="w-2/4 bg-red-200 text-red-800 py-2 px-4 rounded mb-4 text-center">{message}</p>}
+          </div>
+          {results.length > 0 && <div className="mt-4 flex justify-center">
+            <table className="w-2/4 mb-10 border-collapse border border-gray-200">
               <thead>
                 <tr>
                   <th className="bg-gray-100 border border-gray-200 px-4 py-2">Registration No.</th>
@@ -147,12 +147,7 @@ const Evaluation = () => {
                 </tr>
               </tbody>
             </table>
-          </div>
-        ) : 
-        (<div className='flex justify-center'>
-              {/* <p className="w-full bg-red-200 text-red-800 py-2 px-4 rounded mb-4 text-center"></p> */}
-          </div>
-         )}
+          </div>}
       </div>
     </div>
   );

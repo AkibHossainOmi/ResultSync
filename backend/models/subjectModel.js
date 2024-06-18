@@ -1,9 +1,9 @@
 const pool = require('../config/database');
 
 class Subject {
-  static insertSubject(subjectCode, subjectName, semester) {
+  static insertSubject(subjectCode, subjectName, semester, added_by) {
     return new Promise((resolve, reject) => {
-      pool.query('INSERT INTO Subject (subject_code, subject_name, semester) VALUES (?, ?, ?)', [subjectCode, subjectName, semester], (error, results) => {
+      pool.query('INSERT INTO Subject (subject_code, subject_name, semester, added_by) VALUES (?, ?, ?, ?)', [subjectCode, subjectName, semester, added_by], (error, results) => {
         if (error) {
           reject(error);
         } else {
@@ -22,6 +22,38 @@ class Subject {
           resolve(results);
         }
       });
+    });
+  }
+
+  static deleteBySubjectCode(subjectCode) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        'DELETE FROM Subject WHERE subject_code = ?',
+        [subjectCode],
+        (error, results) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(results);
+          }
+        }
+      );
+    });
+  }
+
+  static updateBySubjectCode(oldSubjectCode, newSubjectCode, subjectName, semester) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        'UPDATE Subject SET subject_code = ?, subject_name = ?, semester = ? WHERE subject_code = ?',
+        [newSubjectCode, subjectName, semester, oldSubjectCode],
+        (error, results) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(results);
+          }
+        }
+      );
     });
   }
 }

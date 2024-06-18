@@ -17,6 +17,9 @@ exports.getResults = async (req, res) => {
 
   try {
     const results = await Result.getResults(registrationNo, semester);
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Results not published' });
+    }
     res.status(200).json(results);
   } catch (error) {
     console.error('Error fetching results:', error);

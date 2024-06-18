@@ -1,48 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from "../Hooks/UseAuth";
 import React, { useState, useEffect, useRef } from "react";
-// import { clearUserStatus, getLoggedInStatus, setLoggedIn } from "./Status";
 
 export default function Navbar() {
-//   const isAuthenticated = parseInt(getLoggedInStatus());
-//   const history = useNavigate();
-  // const dropdownRef = useRef(null);
-
-  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  // const handleLogout = (event) => {
-  //   event.preventDefault();
-  //   setLoggedIn(0);
-  //   clearUserStatus();
-  //   history('/login');
-  //   window.location.reload();
-  //   console.log("Logged out successfully");
-  // };
-
-  // const toggleDropdown = () => {
-  //   setIsDropdownOpen(!isDropdownOpen);
-  // };
-
-  // const closeDropdown = (event) => {
-  //   if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-  //     setIsDropdownOpen(false);
-  //   }
-  // };
-
-
-//   useEffect(() => {
-//     document.addEventListener("mousedown", closeDropdown);
-
-//     return () => {
-//       document.removeEventListener("mousedown", closeDropdown);
-//     };
-//   }, []);
-
 const isAuthenticated = useAuth();
 const navigate = useNavigate();
 
 const handleLogout = (event) => {
   localStorage.removeItem('authToken');
+  localStorage.removeItem('email');
   console.log("Logged out successfully");
   navigate("/login");
 };
@@ -141,13 +107,13 @@ const dropdownRef = useRef(null);
                 <Link to="/" className="pl-5 text-white text-lg hover: ">
                     Home
                 </Link>
-                {/* <Link to="/evaluation" className="pl-5 text-white text-lg hover: ">
-                    Evaluation
-                </Link> */}
             </div>
             <div className="hidden sm:flex flex items-center">
                 <Link to="/login" className="text-white text-lg hover:">
                     Login
+                </Link>
+                <Link to="/register" className="ml-8 text-white text-lg hover: ">
+                  Register
                 </Link>
             </div>
         </div>
@@ -168,6 +134,11 @@ const dropdownRef = useRef(null);
                   <li>
                     <Link to="/login" className="ml-8 text-white text-lg hover: ">
                       Login
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/register" className="ml-8 text-white text-lg hover: ">
+                      Register
                     </Link>
                   </li>
                   </>

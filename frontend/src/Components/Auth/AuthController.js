@@ -15,14 +15,14 @@ export default function Authenticating() {
       return;
     }
 
-    // Send token to backend for validation
     axios.get(`${process.env.REACT_APP_API_URL}/auth/${token}`)
       .then(response => {
         console.log(response);
         if (response.data.success) {
-          // Token is valid, redirect to the appropriate page
           localStorage.setItem('authToken', token);
-          navigate('/result');
+          setTimeout(() => {
+            navigate('/result');
+          }, 500);
         } else {
           setMessage('Token is invalid');
         }
@@ -35,7 +35,9 @@ export default function Authenticating() {
 
   return (
     <div>
-      <Navbar/>
+      <div className="relative z-50">
+      <Navbar />
+      </div>
       <div className="h-screen flex justify-center items-center bg-gray-100">
       <div className="text-center">
         {message ? (

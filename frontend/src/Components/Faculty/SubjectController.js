@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';  // Import the useNavigate hook
 import Navbar from '../Navbar/Navbar';
 
 const SubjectController = () => {
@@ -8,10 +9,11 @@ const SubjectController = () => {
   const [semester, setSemester] = useState('');
   const [message, setMessage] = useState('');
 
+  const navigate = useNavigate();  // Initialize useNavigate
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate semester field
     const semesterInt = parseInt(semester);
     if (semesterInt < 1 || semesterInt > 12 || isNaN(semesterInt)) {
       setMessage('Semester must be a number between 1 and 12');
@@ -22,7 +24,8 @@ const SubjectController = () => {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/subjects`, {
         subjectCode,
         subjectName,
-        semester: semesterInt  // Include validated semester in the request payload
+        semester: semesterInt,
+        added_by: localStorage.getItem('email'),
       });
       setMessage(response.data.message);
       setSubjectCode('');
@@ -30,15 +33,20 @@ const SubjectController = () => {
       setSemester('');
     } catch (error) {
       console.error('Error adding subject:', error);
-      setMessage('Error adding subject. Please try again.');
+      setMessage(error.response?.data?.error || 'An error occurred');
     }
+  };
+
+  const handleViewAll = () => {
+    navigate('/subjects');  // Navigate to the subject list page
   };
 
   return (
     <div>
-      <Navbar />
-      <div className="pt-5 mt-60 container mx-auto">
-        {message && <p className="bg-green-200 text-green-800 py-2 px-4 rounded mb-4">{message}</p>}
+      <div className="relative z-50">
+        <Navbar />
+      </div>
+      <div className="pt-5 mt-40 container mx-auto">
         <h2 className="text-2xl font-bold mb-4 flex justify-center">Add New Subject</h2>
         <form onSubmit={handleSubmit} className="w-1/2 mx-auto">
           <div className="mb-4">
@@ -89,8 +97,18 @@ const SubjectController = () => {
             >
               Add Subject
             </button>
+            <button
+              type="button"
+              onClick={handleViewAll}  // Attach the handler
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              View All
+            </button>
           </div>
         </form>
+        <div className='flex justify-center'>
+          {message && <p className="mt-4 w-2/4 bg-green-200 text-green-800 py-2 px-4 rounded mb-4 text-center">{message}</p>}
+        </div>
       </div>
     </div>
   );
