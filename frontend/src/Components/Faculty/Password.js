@@ -58,51 +58,52 @@ export default function Password() {
       });
   };
 
-  return !isAuthenticated? (
-    <div>
-      <div className="relative z-50">
+  return !isAuthenticated ? (
+    <div className="bg-gray-100 min-h-screen">
       <Navbar />
-      </div>
-      <div className="pt-5 mt-40 container mx-auto flex justify-center">
-        <div className="max-w-md w-full bg-white px-8 pt-6 pb-8 mb-4">
-          {error && <p className="text-red-600 text-center text-3xl font-bold">{error}</p>}
+      <div className="container mx-auto px-4 py-40 flex justify-center">
+        <div className="bg-white p-8 rounded-lg shadow-md w-full md:w-1/2 lg:w-1/3">
+          {error && <p className="text-red-600 text-center text-xl font-bold mb-4">{error}</p>}
           {!error && (
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label htmlFor="password" className="block text-sm font-semibold text-gray-600">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={password}
-                  onChange={handleInputChange}
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-200 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-600">Confirm Password</label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  value={confirmPassword}
-                  onChange={handleInputChange}
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-200 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full py-2 px-4 bg-slate-500 text-white rounded-md hover:bg-slate-600 focus:outline-none focus:bg-slate-600"
-              >
-                Set Password
-              </button>
-              {message && <p className="text-green-500 text-sm mt-2">{message}</p>}
-            </form>
+            <>
+              <h2 className="text-xl font-bold text-center mb-6">Set Password</h2>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                  <label htmlFor="password" className="block text-sm font-semibold text-gray-800">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={password}
+                    onChange={handleInputChange}
+                    className="block w-full px-3 py-2 mt-2 text-gray-800 bg-gray-200 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 focus:outline-none focus:ring focus:ring-opacity-40"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-800">Confirm Password</label>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    value={confirmPassword}
+                    onChange={handleInputChange}
+                    className="block w-full px-3 py-2 mt-2 text-gray-800 bg-gray-200 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 focus:outline-none focus:ring focus:ring-opacity-40"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  Set Password
+                </button>
+                {message && <p className="text-green-500 text-sm mt-2">{message}</p>}
+              </form>
+            </>
           )}
         </div>
       </div>
     </div>
-  ) : <Navigate to="/" /> ;
+  ) : <Navigate to="/" />;
 }

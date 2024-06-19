@@ -78,79 +78,83 @@ const Evaluation = () => {
   };
 
   return (
-    <div>
-      <div className="relative z-50">
+    <div className="bg-gray-100 min-h-screen">
       <Navbar />
-      </div>
-      <div className="pt-5 mt-40 container mx-auto">
-        <h2 className="text-2xl font-bold mb-4 flex justify-center">View Results</h2>
-        <div className="flex justify-center mb-4">
-          <form className="w-2/4" onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="registrationNo">
-                Registration No.
-              </label>
-              <input
-                id="registrationNo"
-                type="text"
-                value={registrationNo}
-                onChange={(e) => setRegistrationNo(e.target.value)}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="semester">
-                Semester
-              </label>
-              <Select
+      <div className="sm:w-2/4 container mx-auto px-4 py-40">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="p-6 pt-10 pb-10">
+            <h2 className="text-xl font-bold mb-4 text-center">View Result</h2>
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+              <div className="mb-4">
+                <label htmlFor="registrationNo" className="block text-sm font-medium text-gray-700">Registration No.</label>
+                <input
+                  id="registrationNo"
+                  type="text"
+                  value={registrationNo}
+                  onChange={(e) => setRegistrationNo(e.target.value)}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Enter Registration No."
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="semester" className="block text-sm font-medium text-gray-700">Semester</label>
+                <Select
+                id="semester"
                 options={semesters}
                 value={selectedSemester}
                 onChange={setSelectedSemester}
-                className="w-full"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 placeholder="Select Semester"
                 required
+                menuPortalTarget={document.body}
+                styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
               />
-            </div>
-            <div className="flex justify-center">
-              <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                View Result
-              </button>
-            </div>
-          </form>
-        </div>
-          <div className='flex justify-center'>
-            {message && <p className="w-2/4 bg-red-200 text-red-800 py-2 px-4 rounded mb-4 text-center">{message}</p>}
+              </div>
+              <div className="">
+                <button type="submit" 
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  View Result
+                </button>
+              </div>
+            </form>
+            {message && <p className="text-red-700 text-center mt-4">{message}</p>}
           </div>
-          {results.length > 0 && <div className="mt-4 flex justify-center">
-            <table className="w-2/4 mb-10 border-collapse border border-gray-200">
-              <thead>
-                <tr>
-                  <th className="bg-gray-100 border border-gray-200 px-4 py-2">Registration No.</th>
-                  <th className="bg-gray-100 border border-gray-200 px-4 py-2">Subjects</th>
-                  <th className="bg-gray-100 border border-gray-200 px-4 py-2">Marks</th>
-                  <th className="bg-gray-100 border border-gray-200 px-4 py-2">CGPA</th>
-                </tr>
-              </thead>
-              <tbody>
-                {results.map((result, index) => (
-                  <tr key={index}>
-                    <td className="border border-gray-200 px-4 py-2 text-center">{result.reg_no}</td>
-                    <td className="border border-gray-200 px-4 py-2 text-center">{result.subject_name}</td>
-                    <td className="border border-gray-200 px-4 py-2 text-center">{result.marks}</td>
-                    <td className="border border-gray-200 px-4 py-2 text-center">{result.cgpa}</td>
-                  </tr>
-                ))}
-                <tr>
-                  <td className="border border-gray-200 px-4 py-2 text-center font-bold" colSpan="3">Average CGPA</td>
-                  <td className="border border-gray-200 px-4 py-2 text-center font-bold">{averageCGPA.toFixed(2)}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>}
+          {results.length > 0 && (
+            <div className="p-6">
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse border border-gray-200">
+                  <thead>
+                    <tr className="bg-gray-100">
+                      <th className="border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700">Registration No.</th>
+                      <th className="border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700">Subjects</th>
+                      <th className="border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700">Marks</th>
+                      <th className="border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700">CGPA</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {results.map((result, index) => (
+                      <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                        <td className="border border-gray-300 px-4 py-2 text-sm text-gray-800">{result.reg_no}</td>
+                        <td className="border border-gray-300 px-4 py-2 text-sm text-gray-800">{result.subject_name}</td>
+                        <td className="border border-gray-300 px-4 py-2 text-sm text-gray-800">{result.marks}</td>
+                        <td className="border border-gray-300 px-4 py-2 text-sm text-gray-800">{result.cgpa.toFixed(2)}</td>
+                      </tr>
+                    ))}
+                    <tr className="bg-gray-100">
+                      <td className="border border-gray-300 px-4 py-2 text-sm font-bold text-gray-700" colSpan="3">Average CGPA</td>
+                      <td className="border border-gray-300 px-4 py-2 text-sm font-bold text-gray-700">{averageCGPA.toFixed(2)}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
-  );
+  );  
 };
 
 export default Evaluation;
