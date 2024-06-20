@@ -27,3 +27,26 @@ exports.getResults = async (req, res) => {
   }
 };
 
+exports.updateResult = async (req, res) => {
+  const { reg_no, subject_code, marks } = req.body;
+
+  try {
+    await Result.updateResult(reg_no, subject_code, marks);
+    res.status(200).json({ message: 'Result updated successfully' });
+  } catch (error) {
+    console.error('Error updating result:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+exports.deleteResult = async (req, res) => {
+  const { reg_no, subject_code } = req.query;
+
+  try {
+    await Result.deleteResult(reg_no, subject_code);
+    res.status(200).json({ message: 'Result deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting result:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};

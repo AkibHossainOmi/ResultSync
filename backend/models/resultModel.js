@@ -32,6 +32,39 @@ class Result {
       });
     });
   }
+
+  static updateResult(reg_no, subject_code, marks) {
+    return new Promise((resolve, reject) => {
+      const query = `
+        UPDATE Result 
+        SET marks = ? 
+        WHERE reg_no = ? AND subject_code = ?
+      `;
+      pool.query(query, [marks, reg_no, subject_code], (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }
+
+  static deleteResult(reg_no, subject_code) {
+    return new Promise((resolve, reject) => {
+      const query = `
+        DELETE FROM Result 
+        WHERE reg_no = ? AND subject_code = ?
+      `;
+      pool.query(query, [reg_no, subject_code], (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }
 }
 
 module.exports = Result;
