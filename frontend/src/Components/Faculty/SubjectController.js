@@ -61,9 +61,12 @@ const SubjectController = () => {
       <Navbar />
       <div className="sm:w-2/4 container mx-auto px-4 py-40">
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="p-6 pt-10 pb-10">
+          <div className="p-6 pt-10 pb-10 sm:pb-15 md:pb-20">
+          <div className='flex justify-center'>
+          <img className='h-20 mb-10 mt-10 pl-2' src='DIITLogo.png'></img>
+          </div>
             <h2 className="text-xl font-bold mb-4 text-center">Add New Subject</h2>
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
               <div className="mb-4">
                 <label htmlFor="subjectCode" className="block text-sm font-medium text-gray-700">Subject Code</label>
                 <input

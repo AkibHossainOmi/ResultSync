@@ -34,7 +34,10 @@ const StudentController = () => {
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
       <div className="sm:w-2/4 pt-40 pb-20 container mx-auto">
-        <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+        <div className="max-w-4xl mx-auto bg-white p-16 rounded-lg shadow-md">
+        <div className='flex justify-center'>
+          <img className='h-20 mb-10 mt-10 pl-4' src='DIITLogo.png'></img>
+          </div>
         <h2 className="text-xl font-bold mb-4 text-center">Add New Student</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
