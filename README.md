@@ -134,4 +134,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - [Express.js](https://expressjs.com/)
 - [MySQL](https://www.mysql.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
-```
