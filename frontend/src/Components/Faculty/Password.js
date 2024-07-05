@@ -51,7 +51,7 @@ export default function Password() {
         setMessage(response.data.message);
         localStorage.setItem('authToken', token);
         localStorage.setItem('email', email);
-        navigate('/result');
+        navigate('/subject');
       })
       .catch(error => {
         setError(error.response.data.message || 'Failed to set password');
@@ -66,6 +66,9 @@ export default function Password() {
           {error && <p className="text-red-600 text-center text-xl font-bold mb-4">{error}</p>}
           {!error && (
             <>
+            <div className='flex justify-center'>
+          <img className='h-20 mb-10 mt-10 pl-4' src='DIITLogo.png'></img>
+          </div>
               <h2 className="text-xl font-bold text-center mb-6">Set Password</h2>
               <form onSubmit={handleSubmit}>
                 <div className="mb-4">

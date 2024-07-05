@@ -148,11 +148,14 @@ const Evaluation = () => {
   return (
       <div className="bg-gray-100 min-h-screen">
         <Navbar />
-        <div className="sm:w-3/4 container mx-auto px-4 py-40">
+        <div className="sm:w-3/4 md:w-2/4 container mx-auto px-4 py-40">
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            <div className="p-6 pt-10 pb-10">
+            <div className="p-6 pt-10 pb-10 sm:pb-15 md:pb-20">
+            <div className='flex justify-center'>
+          <img className='h-20 mb-10 mt-10 pl-8' src='DIITLogo.png'></img>
+          </div>
               <h2 className="text-xl font-bold mb-4 text-center">View Result</h2>
-              <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+              <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
                 <div className="mb-4">
                   <label htmlFor="registrationNo" className="block text-sm font-medium text-gray-700">Registration No.</label>
                   <input

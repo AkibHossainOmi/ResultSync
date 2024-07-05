@@ -41,6 +41,9 @@ const ForgotPassword = () => {
       <Navbar />
       <div className="container mx-auto px-4 py-40 flex justify-center">
         <div className="bg-white p-8 rounded-lg shadow-md w-full md:w-1/2 lg:w-1/3">
+        <div className='flex justify-center'>
+          <img className='h-20 mb-10 mt-10 pl-4' src='DIITLogo.png'></img>
+          </div>
           <h2 className="text-xl font-bold text-center mb-6">Forgot Password</h2>
           <form onSubmit={handleReset}>
             <div className="mb-4">

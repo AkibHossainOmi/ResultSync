@@ -84,8 +84,12 @@ const ResultController = () => {
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
       <div className="sm:w-full md:w-2/3 lg:w-2/4 xl:w-2/4 pt-40 pb-20 px-4 sm:px-6 md:px-8 lg:px-8 xl:px-8 mx-auto">
-        <div className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-          <h2 className="text-xl font-bold text-center mb-6">Enter Subject Marks</h2>
+        <div className="bg-white shadow-md rounded-lg px-16 pt-6 pb-16 mb-4">
+          <div className='flex justify-center'>
+          <img className='h-20 mb-10 mt-10 pl-4' src='DIITLogo.png'></img>
+          </div>
+        
+          <h2 className="text-xl font-bold text-center mb-10">Enter Subject Marks</h2>
           <div className="mb-6">
             <Select
               options={subjects.map((subject) => ({

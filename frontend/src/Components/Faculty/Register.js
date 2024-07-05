@@ -35,7 +35,10 @@ const Register = () => {
       <Navbar />
       <div className="container mx-auto px-4 py-40 flex justify-center">
         <div className="bg-white p-8 rounded-lg shadow-md w-full md:w-1/2 lg:w-1/3">
-          <h2 className="text-xl font-bold text-center mb-6">Register</h2>
+        <div className='flex justify-center'>
+          <img className='h-20 mb-10 mt-10 pl-4' src='DIITLogo.png'></img>
+          </div>
+          <h2 className="text-xl font-bold text-center mb-6">Register as Faculty</h2>
           <form onSubmit={handleRegister}>
             <div className="mb-4">
               <label htmlFor="email" className="block text-sm font-semibold text-gray-800">
