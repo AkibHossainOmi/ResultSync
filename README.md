@@ -135,5 +135,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - [MySQL](https://www.mysql.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 ```
-
-Feel free to modify the content as per your specific project details and requirements.
